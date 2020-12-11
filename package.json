@@ -1,0 +1,30 @@
+{
+  "name": "farmatrix",
+  "version": "0.0.0",
+  "description": "maize supply chain dapp ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kimxons/matrix.git"
+  },
+  "keywords": [
+    "farmatrix",
+    "supply",
+    "chain"
+  ],
+  "author": "kimxons",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kimxons/matrix/issues"
+  },
+  "homepage": "https://github.com/Kimxons/matrix#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.3.0"
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^1.2.0"
+  }
+}
