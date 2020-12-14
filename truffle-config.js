@@ -1,6 +1,6 @@
 // const path = require("path");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const mnemonic = "report amazing essay iron arm trumpet olive unveil pair tuition tissue sing";
+const mnemonic = "xxxx";
 module.exports = {
 
   // contracts_directory: path.join(__dirname, "contracts"),
