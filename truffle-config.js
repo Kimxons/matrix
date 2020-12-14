@@ -34,19 +34,19 @@ module.exports = {
     // 
       ropsten:{
         provider: function() {
-          return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/9ca7374dcade470b971c164616184d35")
+          return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/<key>")
         },
         network_id: 3
       },
       
       // kovan: {
       //   provider: function() {
-      //     return new HDWalletProvider(mnemonic, "https://kovan.infura.io/v3/9ca7374dcade470b971c164616184d35")
+      //     return new HDWalletProvider(mnemonic, "https://kovan.infura.io/v3/<key>")
       //   },
       //   network_id: 4
       // },
       // ropsten: {
-      //   provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/9ca7374dcade470b971c164616184d35`),
+      //   provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/<key>'),
       //   network_id: 3,       // Ropsten's id
       //   gas: 5500000,        // Ropsten has a lower block limit than mainnet
       //   confirmations: 2,    // # of confs to wait between deployments. (default: 0)
