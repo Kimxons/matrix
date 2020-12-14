@@ -1,6 +1,6 @@
 // const path = require("path");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const mnemonic = "xxxx";
+const mnemonic = "report amazing essay iron arm trumpet olive unveil pair tuition tissue sing";
 module.exports = {
 
   // contracts_directory: path.join(__dirname, "contracts"),
@@ -38,6 +38,13 @@ module.exports = {
         },
         network_id: 3
       },
+      
+      // kovan: {
+      //   provider: function() {
+      //     return new HDWalletProvider(mnemonic, "https://kovan.infura.io/v3/9ca7374dcade470b971c164616184d35")
+      //   },
+      //   network_id: 4
+      // },
       // ropsten: {
       //   provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/9ca7374dcade470b971c164616184d35`),
       //   network_id: 3,       // Ropsten's id

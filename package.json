@@ -18,7 +18,7 @@
   "author": "kimxons",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kimxons/matrix/issues"
+    "url": "https://github.com/Kimxons/matrix"
   },
   "homepage": "https://github.com/Kimxons/matrix#readme",
   "dependencies": {
@@ -26,5 +26,8 @@
   },
   "devDependencies": {
     "@truffle/hdwallet-provider": "^1.2.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

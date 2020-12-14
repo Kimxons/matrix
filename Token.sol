@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-// in Contract modules for simple authorization and access control mechanisms.
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -22,12 +21,12 @@ contract TheProduct is Ownable{
 	/*
 	state variable to store a ProductSubmission struct for each possible product hash
 	 */
-	mapping(string => ProductSubmission) public productMap;
+	mapping(string => ProductSubmission) public productsMap;
 
 	/*
 	a state variable to store an address corresponding to each product submission
 	 */
-	mapping(string => address) public productAddressMap;
+	mapping(string => address) public productsAddressMap;
 
 	/*
 	a dynamically-sized array containing product hashes
@@ -62,22 +61,26 @@ contract TheProduct is Ownable{
 		require(!stopped, "contract is currently stopped");
 		_;
 	}
+	modifier onlyInEmergency() {
+		require(stopped, "contract not currently stopped");
+		_;
+	}
 
 	/*
 	@dev register product submission 
 	 */
-	function registeredProductSubmission(
-		string memory ProductHash,
-		string memory ProductInfo,
-		string memory SupplierDetails,
-		string memory SubmissionDate)
-	stopEmergency public returns(uint){
-		// require(this.ProductSubmission(ProductHash) == false, "Error: product already submitted.");
+	// function registeredProductSubmission(
+	// 	string memory ProductHash,
+	// 	string memory ProductInfo,
+	// 	string memory SupplierDetails,
+	// 	string memory SubmissionDate)
+	// stopEmergency public returns(uint){
+	// 	require(this.checkProductSubmission(ProductHash) == false, "Error: product already submitted.");
 
-		// uint256 SubmissionBlockNumber = block.number;
-		// uint256 isSet = 1;
+	// 	uint256 SubmissionBlockNumber = block.number;
+	// 	uint256 isSet = 1;
 
-		// productMap(ProductHash) = ProductSubmission(
+		// productsMap(ProductHash) = ProductSubmission(
 		// 	ProductHash, 
 		// 	ProductInfo, 
 		// 	SupplierDetails, 
@@ -88,7 +91,7 @@ contract TheProduct is Ownable{
 		/*
 		map producthash & product submitter then save in storage
 		 */
-		// productAddressMap[ProductHash] = msg.sender;
+		// productsAddressMap[ProductHash] = msg.sender;
 
 		/*
 		add the producthash to the array for length tracking
@@ -98,5 +101,22 @@ contract TheProduct is Ownable{
 
 		// emit registeredProductEvent(id);
 		// return id;
-	}
+	// }
+	/*
+	@dev return the no. of productsubmissions tracked in blockchain
+	 */
+	// function getProductSubmissionCount() external onlyOwner
+	// 
+	
+	/*
+	@dev confirm whether hash exists in the product submissions
+	 */
+	// function checkProductSubmission(string memory hash) public stopEmergency view returns(bool){
+	// 	uint onChainisSet = productsMap[hash].isSet;
+	// 	if(onChainisSet > 0){
+	// 		return true;
+	// 	}else{
+	// 		return false;
+	// 	}
+	// }
 }
