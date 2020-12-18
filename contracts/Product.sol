@@ -1,40 +1,36 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.0;
-pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
 import "./Registrations.sol";
 import "./Token/ERC20.sol";
 
 contract Product is Context, Ownable{
 	using SafeMath for uint; 
-
 	address payable contractOwner;
     bool private stopped; // for use in circuit breaker
 
-    bytes32 id;
-    address buyer;
-    address seller;
-    // mapping(address => uint256) supply;
     Registrations private registrations;
-
-    address[] suppliers;
-
+    
+    //identifiers  
+    bytes32 OrderId;
+    address buyer;
+    address seller; //supplier(farmer)
     bytes32 deliveryDate;
     bytes32 paymentDate;
     uint256 orderAmount;
     bytes32[50] orderDetails;
-
     bool approvalSeller;
 
     bool approvalBuyer;
-    bool orderCompletion;
+    bool orderCompletion;   
 
-	/**
-	 * a struct acts as a loose bag of variables
-	 */
+    address[] suppliers; //sellers (farmers)
+
+    /**
+    * a struct acts as a loose bag of variables
+    */
 	struct ProductSubmission{
 		string ProductHash;
 		string ProductInfo;
@@ -43,10 +39,6 @@ contract Product is Context, Ownable{
 		uint256 BlockNumber;
 		uint isSet; 
 	}
-
-	// constructor(bytes32 _id) public {
-	// 	id = _id;
-	// }
 	
 	modifier checkUser(address _address) {
         require(registrations.isRegistered(_address), "Access Denied");
@@ -183,6 +175,7 @@ contract Product is Context, Ownable{
         // otherwise return false
         return false;
     }
+
     /**
      * @dev Confirm whether the contract is stopped or not.
      */
@@ -190,77 +183,53 @@ contract Product is Context, Ownable{
         return stopped;
     }
 
-	/*
-	 @dev fallback function. This gets executed if a transaction with invalid data is sent to the contract or
-     *   just ether without data. We revert the send so that no-one accidentally loses money when using the contract.
-	 */
-
-	// function() external {
- //        revert();
- //    }
-
     function destroy() public onlyOwner onlyInEmergency {
         // cast owner which is address to address payable
         selfdestruct(contractOwner);
     }
 
-    function setOrderCompletion(bool _orderCompletion)
-        public
+    function setOrderCompletion(bool _orderCompletion) public
         onSellerTrue
         onBuyerTrue
         onlyOnOrderDetails
-        onBoolNull(orderCompletion)
-    {
+        onBoolNull(orderCompletion){
         orderCompletion = _orderCompletion;
     }
 
-    function setBuyer(address _buyer)
-        public
+    function setBuyer(address _buyer) public
         onUserNull(buyer)
-        checkUser(_buyer)
-    {
+        checkUser(_buyer){
         buyer = _buyer;
     }
 
     function getBuyer() public view onlyOnSetAddress(buyer) returns (address) {
         return buyer;
     }
-    function getSeller()
-        public
-        view
+
+    function getSeller() public view
         onlyOnSetAddress(seller)
-        returns (address)
-    {
-        return seller;
+        returns (address) {
+            return seller;
     }
 
-    function getSuppliers()
-        public
-        view
+    function getSuppliers() public view
         onlyOnSuppliers
         onBuyerTrue
         onSellerTrue
-        returns (address[] memory)
-    {
-        return suppliers;
+        returns (address[] memory){
+            return suppliers;
     }
 
-    function getDeliveryDate()
-        public
-        view
+    function getDeliveryDate() public view
         onlyOnString(deliveryDate)
-        returns (bytes32)
-    {
-        return deliveryDate;
+        returns (bytes32) {
+            return deliveryDate;
     }
 
-    function getPaymentDate()
-        public
-        view
+    function getPaymentDate() public view
         onlyOnString(paymentDate)
-        returns (bytes32)
-    {
-        return paymentDate;
+        returns (bytes32) {
+            return paymentDate;
     }
 
     function getOrderAmt() public view returns (uint256) {
@@ -270,12 +239,9 @@ contract Product is Context, Ownable{
         require(orderDetails.length != 0, "Order Details not set");
         _;
     }
-    function getOrderDetails()
-        public
-        view
+    function getOrderDetails() public view
         onlyOnOrderDetails
-        returns (bytes32[50] memory)
-    {
+        returns (bytes32[50] memory){
         return orderDetails;
     }
 
@@ -287,32 +253,24 @@ contract Product is Context, Ownable{
         return approvalBuyer;
     }
 
-    function setSeller(address _seller)
-        public
+    function setSeller(address _seller) public
         onUserNull(seller)
-        checkUser(_seller)
-    {
-        seller = _seller;
+        checkUser(_seller){
+            seller = _seller;
     }
 
-    function setApprovalSeller(bool _approvalSeller)
-        public
+    function setApprovalSeller(bool _approvalSeller) public
         onlyOnString(deliveryDate)
         onlyOnString(paymentDate)
         onlyOnOrderDetails
         onBoolNull(approvalSeller)
-        onlyOnNum(orderAmount)
-    {
-        approvalSeller = _approvalSeller;
+        onlyOnNum(orderAmount){
+            approvalSeller = _approvalSeller;
     }
 
-    function setApprovalBuyer(bool _approvalBuyer)
-        public
+    function setApprovalBuyer(bool _approvalBuyer) public
         onSellerTrue
-        onBoolNull(approvalBuyer)
-    {
-        approvalBuyer = _approvalBuyer;
+        onBoolNull(approvalBuyer){
+            approvalBuyer = _approvalBuyer;
     }
 }
-
-//TODO -- work on the product (buyer & seller) logistics
