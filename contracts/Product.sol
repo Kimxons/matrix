@@ -15,17 +15,18 @@ contract Product is Context, Ownable{
     
     //identifiers  
     bytes32 OrderId;
-    address buyer;
-    address seller; //supplier(farmer)
+    address public buyer;
+    address public seller; //supplier(farmer)
     bytes32 deliveryDate;
     bytes32 paymentDate;
     uint256 orderAmount;
     bytes32[50] orderDetails;
+    
     bool approvalSeller;
-
     bool approvalBuyer;
     bool orderCompletion;   
-
+    
+    // a dynamically sized array of suppliers
     address[] suppliers; //sellers (farmers)
 
     /**
@@ -152,17 +153,12 @@ contract Product is Context, Ownable{
         _;
     }
 
-	function registerProductSubmission(
-		string memory ProductHash
-		) 
-
-		stopInEmergency public view returns(uint){
-
-			require(this.checkProductSubmission(ProductHash) == false, "Error: Product already uploaded.");
-
-	        uint256 SubmissionBlocknumber = block.number;
-	        uint256 IsSet = 1;
-		}
+	function registerProductSubmission(string memory ProductHash)
+    stopInEmergency public view returns(uint){
+        require(this.checkProductSubmission(ProductHash) == false, "Error: Product already uploaded.");
+        uint256 Blocknumber = block.number;
+        uint256 IsSet = 1;
+	}
 
 	function checkProductSubmission(string memory hash) 
 	public stopInEmergency view returns (bool) {
