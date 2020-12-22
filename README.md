@@ -8,3 +8,5 @@
 /*- Note that there’s a big difference between having two voting rights and 
 	two deeds of ownership: 
 	each vote is equal to all others, but houses usually are not! This is called fungibility. Fungible goods are equivalent and interchangeable, like Ether, fiat currencies, and voting rights. Non-fungible goods are unique and distinct, like deeds of ownership, or collectibles.
+	
+*TODO* -- reduce the smartcontracts code 
