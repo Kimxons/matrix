@@ -2,10 +2,10 @@
 pragma solidity ^0.6.0;
 
 /**
- * Token.sol
+ * file - Token.sol
  * name - name of the token 
  * symbol - symbol of the token
- * decimals - number of significant decimals for the token 
+ * decimals - number of significant decimals for the token (18) 
  * totalSupply - total supply of token (interface)
  * balanceOf - Mapping to store number of tokens inside each address
  * allowance - Mapping to store allowance of token transfer for each address
@@ -15,7 +15,7 @@ pragma solidity ^0.6.0;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./TokenInterface.sol";
 
-contract ERC20 is TokenInterface {
+contract ERC20 is TokenInterface{
 	using SafeMath for uint256;
 
 	uint256 private constant MAX_UINT256 = 2**256 - 1;
